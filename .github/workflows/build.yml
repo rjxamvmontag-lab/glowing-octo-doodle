@@ -1,8 +1,8 @@
-name: Build Android APK
+name: Build and Release APK
 
 on:
   push:
-    branches: [ main ]
+    branches: [ "main" ]
 
 jobs:
   build:
@@ -21,12 +21,12 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew || true
 
-    - name: Build Debug APK with Gradle
-      run: ./gradlew assembleDebug || echo "Gradle wrapper missing, checking project structure"
+    - name: Build APK with Gradle
+      run: ./gradlew assembleDebug || echo "Gradle wrapper missing"
 
     - name: Upload APK Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: app-debug
+        name: app-debug-apk
         path: app/build/outputs/apk/debug/app-debug.apk
         
